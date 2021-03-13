@@ -1,0 +1,47 @@
+---
+title: "STAT 184 Homework Exercises" 
+subtitle: "DataComputing Chapters 11"
+author: "Ming Wang"
+output: html_notebook
+---
+
+## Assigned Exercises
+
+DC Ch 10 Exercises: 11.2,11.3,11.5,11.6
+## Front Matter
+
+```{r}
+# clean up workspace environment
+rm(list = ls())
+
+# all packages used for the assignment
+library(dcData)
+library(mosaic) #myplot()
+library(tidyverse) #ggplot2
+library(mosaicData)
+
+#data intake from package
+data("ZipGrography",package = "dcData")
+data("ZipDemography",package = 'dcData')
+```
+
+
+
+## Chapter 11 Exercises
+
+## Problem 11.2
+The tables have different column and different rows, first one is 256, second one is 241, but they are combined. 
+
+##Problem 11.3
+```{r}
+ZipDemography %>%
+  summarise(under5 = sum(Under5years, na.rm = TRUE))
+```
+
+##Problem 11.5
+```{r}
+ZipGeography<-
+  ZipGeography %>%
+
+```
+##Problem 11.6
