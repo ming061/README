@@ -1,0 +1,86 @@
+---
+title: "STAT 184 Homework Exercises" 
+subtitle: "DataComputing Chapters 10"
+author: "Ming Wang"
+output: html_notebook
+---
+
+## Assigned Exercises
+
+DC Ch 10 Exercises: 10.1-10.7
+## Front Matter
+
+```{r}
+# clean up workspace environment
+rm(list = ls())
+
+# all packages used for the assignment
+library(mosaic) #myplot()
+library(tidyverse) #ggplot2
+library(mosaicData)
+library(dcData)
+```
+
+
+## Chapter 10 Exercises
+
+## Problem 10.1
+1.summary function
+2.data verb
+3.reduce function
+4.transformation function
+5.data verb
+6.summary function
+7.data verb
+8.summary function
+
+##Problem 10.2
+1.mutate()
+2.arrange()
+3.filter()
+4.select()
+
+##Problem 10.3
+1.
+```{r}
+nrow(data[grouping(1)=='A' &grouping(2)=='C'])
+aggregate(x=grouping(1)+grouping(2))
+```
+2.
+```{r}
+objects()
+```
+3.
+```{r}
+library(codebook)
+codebook_d<-codebook::bfi
+```
+4.
+```{r}
+.libPaths()
+library()
+search()
+```
+5.
+```{r}
+group_by(data,category)%>%
+```
+##Problem 10.4: 
+##Problem 10.5:
+##Problem 10.6:
+1.
+```{r}
+diamonds %>%
+  group_by(color)%>%
+  summarise("mean"=sum(mean(carat)))%>%
+  arrange(desc(mean))%>%
+  head(1)
+```
+2.
+```{r}
+diamonds %>%
+  group_by(clarity)%>%
+  summarise("mean"=sum(mean(table/carat)))%>%
+  arrange(desc(mean))%>%
+  head(1)
+```

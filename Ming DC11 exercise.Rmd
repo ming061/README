@@ -1,0 +1,97 @@
+---
+title: "STAT 184 Homework Exercises" 
+subtitle: "DataComputing Chapters 11"
+author: "Ming Wang"
+output: html_notebook
+---
+
+## Assigned Exercises
+
+DC Ch 10 Exercises: 11.2,11.3,11.5,11.6
+## Front Matter
+
+```{r}
+# clean up workspace environment
+rm(list = ls())
+
+# all packages used for the assignment
+library(dcData)
+library(tidyverse) #ggplot2
+library(DataComputing)
+
+#data intake from package
+data("ZipGrography",package = "dcData")
+data("ZipDemography",package = 'dcData')
+```
+
+
+
+## Chapter 11 Exercises
+
+## Problem 11.2
+The tables have different column and different rows, first one is 256, second one is 241, but they are combined. 
+
+##Problem 11.3
+```{r}
+ZipDemography %>%
+  summarise(under5 = sum(Under5years, na.rm = TRUE))
+```
+
+##Problem 11.5
+1.1910
+```{r}
+data(ZipGeography)
+ZipGeography %>%
+  summarise(n_distinct(County))
+```
+2.Franklin
+```{r}
+ZipGeography %>%
+  group_by(CityName) %>%
+  summarise(number= n_distinct(State)) %>%
+  arrange(desc(number))
+```
+3.
+```{r}
+CityPopulation <-
+  ZipGeography %>%
+  group_by(CityName,State) %>%
+  summarise(CityPopulation=sum(Population,na.rm = TRUE))
+
+Statepopulation<-
+  ZipGeography %>%
+  group_by(State) %>%
+  summarise(Statepopulation=sum(Population,na.rm = TRUE))
+
+PercentagePop <-
+  CityPopulation%>%
+  inner_join(Statepopulation,by=c("State"="State")) %>%
+  mutate(Percentage=CityPopulation/Statepopulation) %>%
+  group_by(CityName) %>%
+  summarise(Total=sum(Percentage),State)%>%
+  filter(Total>0.05)
+```
+4.Yes
+```{r}
+ZipGeography %>%
+  group_by(State) %>%
+  filter(State!="",Timezone!="") %>%
+  summarise(count=n_distinct(Timezone)) %>%
+  filter(count>1)
+```
+5.Yes
+```{r}
+ZipGeography %>%
+  group_by(CityName) %>%
+  summarise(count=n_distinct(Timezone,na.rm = TRUE)) %>%
+  filter(count>1)
+```
+6.Yes
+```{r}
+ZipGeography %>%
+  group_by(County) %>%
+  summarise(count=n_distinct(Timezone,na.rm = TRUE)) %>%
+  filter(count>1)
+
+```
+##Problem 11.6
